@@ -3,10 +3,11 @@
 Fork of haugene/transmission-openvpn, based on alpine linux. With Polipo instead of Tinyproxy.
 Look at https://haugene.github.io/docker-transmission-openvpn/ for detailed instructions.
 This container adds two new environment variables to configure the polipo disk cache.
+
 WEBPROXY_DISK_CACHE_ENABLED=false/true to enable or disable the disk cache.
-WEBPROXY_DISK_CACHE_DIR=/path/to/disk/cache for instance /data/polipo-cache, since you have to mount that
-dir already anyway. Make sure the dir exists before you start the container, otherwise the disk cache
-will be disabled.
+
+WEBPROXY_DISK_CACHE_DIR=/path/to/disk/cache cache location. For instance /data/polipo-cache, since you have to mount that
+dir already anyway. Make sure the dir exists before you start the container, otherwise the disk cache will be disabled.
 
 
 ## Quick Start
