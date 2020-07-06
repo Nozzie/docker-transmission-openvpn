@@ -2,6 +2,6 @@
 
 if [[ "${WEBPROXY_ENABLED}" = "true" ]]; then
 
-  /etc/init.d/tinyproxy stop
+  /etc/init.d/polipo stop
 
 fi

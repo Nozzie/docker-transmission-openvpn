@@ -6,7 +6,7 @@ VOLUME /config
 ARG DOCKERIZE_ARCH=amd64
 ENV DOCKERIZE_VERSION=v0.6.1
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk --no-cache add bash dumb-init ip6tables ufw@testing openvpn shadow transmission-daemon transmission-cli curl jq unzip\
+    && apk --no-cache add bash dumb-init ip6tables ufw@testing openvpn shadow transmission-daemon transmission-cli curl jq unzip bind-tools polipo@testing \
     && mkdir -p /opt/transmission-ui \
     && echo "Install dockerize $DOCKERIZE_VERSION ($DOCKERIZE_ARCH)" \
     && wget -qO- https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-$DOCKERIZE_ARCH-$DOCKERIZE_VERSION.tar.gz | tar xz -C /usr/bin \
@@ -31,7 +31,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 
 ADD openvpn/ /etc/openvpn/
 ADD transmission/ /etc/transmission/
-ADD tinyproxy /opt/tinyproxy/
+ADD polipo /etc/polipo/
 ADD scripts /etc/scripts/
 
 RUN cat /etc/openvpn/up.sh >> /etc/openvpn/tunnelUp.sh \
@@ -126,10 +126,13 @@ ENV CREATE_TUN_DEVICE= \
     TRANSMISSION_WEB_HOME= \
     DROP_DEFAULT_ROUTE= \
     WEBPROXY_ENABLED=false \
-    WEBPROXY_PORT=8888
+    WEBPROXY_PORT=8888 \
+    WEBPROXY_DISK_CACHE_ENABLED=false \
+    WEBPROXY_DISK_CACHE_DIR=/data/polipo-cache
 
 HEALTHCHECK --interval=5m CMD /etc/scripts/healthcheck.sh
 
 # Expose port and run
 EXPOSE 9091
+EXPOSE 8888
 CMD ["dumb-init", "/etc/openvpn/start.sh"]

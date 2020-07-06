@@ -80,9 +80,11 @@ export TRANSMISSION_WEB_UI={{ .Env.TRANSMISSION_WEB_UI }}
 export PUID={{ .Env.PUID }}
 export PGID={{ .Env.PGID }}
 
-# Need to pass through our tinyproxy settings
+# Need to pass through our polipo settings
 export WEBPROXY_ENABLED={{ .Env.WEBPROXY_ENABLED }}
 export WEBPROXY_PORT={{ .Env.WEBPROXY_PORT }}
+export WEBPROXY_DISK_CACHE_ENABLED={{ .Env.WEBPROXY_DISK_CACHE_ENABLED }}
+export WEBPROXY_DISK_CACHE_DIR={{ .Env.WEBPROXY_DISK_CACHE_DIR }}
 
 # Support custom web frontend
 {{ if .Env.TRANSMISSION_WEB_HOME }} export TRANSMISSION_WEB_HOME={{ .Env.TRANSMISSION_WEB_HOME }} {{end}}

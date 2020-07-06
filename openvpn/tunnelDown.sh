@@ -1,4 +1,4 @@
 #!/bin/bash
 
 /etc/transmission/stop.sh
-[[ ! -f /opt/tinyproxy/stop.sh ]] || /opt/tinyproxy/stop.sh
+[[ ! -f /etc/polipo/stop.sh ]] || /etc/polipo/stop.sh
