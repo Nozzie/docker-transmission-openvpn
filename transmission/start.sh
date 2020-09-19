@@ -61,7 +61,12 @@ if [[ "true" = "$DROP_DEFAULT_ROUTE" ]]; then
 fi
 
 echo "STARTING TRANSMISSION"
-exec su --preserve-environment ${RUN_AS} -s /bin/bash -c "/usr/bin/transmission-daemon -g ${TRANSMISSION_HOME} --logfile ${TRANSMISSION_HOME}/transmission.log" &
+LOGFILE=""
+if [[ "true" = "$TRANSMISSION_LOG_ENABLED" ]]; then
+  LOGFILE=" --logfile ${TRANSMISSION_HOME}/transmission.log"
+  echo "Logging to: ${TRANSMISSION_HOME}/transmission.log"
+fi
+exec su --preserve-environment ${RUN_AS} -s /bin/bash -c "/usr/bin/transmission-daemon -g ${TRANSMISSION_HOME}${LOGFILE}" &
 
 if [[ "${OPENVPN_PROVIDER^^}" = "PIA" ]]
 then

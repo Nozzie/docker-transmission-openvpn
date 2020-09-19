@@ -9,6 +9,7 @@ WEBPROXY_DISK_CACHE_ENABLED=false/true to enable or disable the disk cache.
 WEBPROXY_DISK_CACHE_DIR=/path/to/disk/cache cache location. For instance /data/polipo-cache, since you have to mount that
 dir already anyway. Make sure the dir exists before you start the container, otherwise the disk cache will be disabled.
 
+I have also added TRANSMISSION_LOG_ENABLED=true/false to enable or disable transmission logging.
 
 ## Quick Start
 
